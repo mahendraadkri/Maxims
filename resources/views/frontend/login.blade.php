@@ -1,70 +1,84 @@
 @extends('frontend.master')
 
 @section('content')
-  <div class="page-heading">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="header-text">
-            <h2>Admin Login</h2>
-            <div class="div-dec"></div>
-          </div>
+<div class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 flex items-center justify-center py-20 px-8">
+  <div class="bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl p-12 w-full max-w-lg border border-white/20 mx-4">
+    <div class="text-center mb-10">
+      <h2 class="text-slate-800 font-bold text-3xl mb-2 tracking-tight">Welcome Back</h2>
+      <p class="text-slate-500 text-base">Sign in to access your dashboard</p>
+    </div>
+    
+    @if ($errors->any())
+      <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg mb-6 text-sm">
+        <i class="fa fa-exclamation-triangle mr-2"></i>
+        {{ $errors->first() }}
+      </div>
+    @endif
+    
+    <form method="POST" action="{{ route('login.post') }}">
+      @csrf
+      
+      <div class="mb-8 relative">
+        <label for="email" class="block text-slate-800 font-semibold mb-4 text-sm uppercase tracking-wide">Email Address</label>
+        <div class="relative">
+          <input 
+            type="email" 
+            name="email" 
+            id="email" 
+            placeholder="Enter your email" 
+            value="{{ old('email') }}" 
+            required
+            class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl text-base transition-all duration-300 bg-slate-50 text-slate-800 focus:outline-none focus:border-indigo-500 focus:bg-white focus:shadow-lg focus:-translate-y-0.5"
+          >
+          <i class="fa fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg transition-colors duration-300"></i>
         </div>
       </div>
-    </div>
+      
+      <div class="mb-8 relative">
+        <label for="password" class="block text-slate-800 font-semibold mb-4 text-sm uppercase tracking-wide">Password</label>
+        <div class="relative">
+          <input 
+            type="password" 
+            name="password" 
+            id="password" 
+            placeholder="Enter your password" 
+            required
+            class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl text-base transition-all duration-300 bg-slate-50 text-slate-800 focus:outline-none focus:border-indigo-500 focus:bg-white focus:shadow-lg focus:-translate-y-0.5"
+          >
+          <i class="fa fa-lock absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-lg transition-colors duration-300"></i>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mb-8">
+        <button 
+          type="submit" 
+          class="w-48 bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-0 py-3 px-8 rounded-xl text-sm font-semibold cursor-pointer transition-all duration-300 uppercase tracking-wider hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/25 active:translate-y-0"
+        >
+          <i class="fa fa-sign-in-alt mr-2"></i>
+          Sign In
+        </button>
+      </div>
+      
+      <div class="flex justify-between items-center mb-6">
+        <label class="flex items-center text-slate-500 text-sm">
+          <input type="checkbox" name="remember" class="mr-2 w-auto p-0">
+          Remember me
+        </label>
+        <a href="/" class="text-indigo-500 no-underline text-sm font-medium transition-colors duration-300 hover:text-purple-600">
+          <i class="fa fa-arrow-left mr-1"></i>
+          Back to site
+        </a>
+      </div>
+    </form>
   </div>
+</div>
 
-  <section class="contact-us-form" style="padding-top: 0;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div style="background:#ffffff; border-radius:10px; box-shadow:0 10px 25px rgba(0,0,0,0.08); padding:32px;">
-            <div class="section-heading" style="text-align:center; margin-bottom:22px;">
-              <h6>Welcome back</h6>
-              <h4>Access your dashboard</h4>
-            </div>
-            <form method="POST" action="{{ route('login.post') }}">
-              @csrf
-              <div class="row align-items-end">
-                <div class="col-md-5">
-                  <fieldset>
-                    <label for="email" style="font-weight:500; margin-bottom:6px;">Email</label><br>
-                    <input type="email" name="email" id="email" placeholder="you@example.com" value="{{ old('email') }}" required>
-                  </fieldset>
-                </div>
-                <div class="col-md-5">
-                  <fieldset>
-                    <label for="password" style="font-weight:500; margin-bottom:6px;">Password</label><br>
-                    <input type="password" name="password" id="password" placeholder="••••••••" required>
-                  </fieldset>
-                </div>
-                <div class="col-md-2">
-                  <fieldset>
-                    <button type="submit" class="orange-button" style="width:100%; margin-top:28px;">Login</button>
-                  </fieldset>
-                </div>
-                <div class="col-12" style="margin-top:8px;">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <label style="margin:0;">
-                      <input type="checkbox" name="remember"> Remember me
-                    </label>
-                    <a href="/" style="font-size:14px;">Back to site</a>
-                  </div>
-                </div>
-                @if ($errors->any())
-                  <div class="col-12" style="margin-top:14px;">
-                    <div class="alert alert-danger" style="margin:0;">
-                      {{ $errors->first() }}
-                    </div>
-                  </div>
-                @endif
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<style>
+  /* Custom focus states for icons */
+  .relative input:focus + i {
+    color: #6366f1;
+  }
+</style>
 @endsection
 
 

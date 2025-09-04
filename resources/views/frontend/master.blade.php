@@ -12,6 +12,7 @@
     <title>Maxims</title>
 
     {{-- CSS Files --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-574-mexant.css">
@@ -184,7 +185,7 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/isotope.js"></script>
     <script src="assets/js/owl-carousel.js"></script>
 
     <script src="assets/js/tabs.js"></script>
@@ -233,6 +234,20 @@
       };
 
       var swiper = new Swiper(".swiper-container", swiperOptions);
+
+      // Initialize Owl Carousel for Testimonials
+      $('.owl-testimonials').owlCarousel({
+        items: 1,
+        loop: true,
+        dots: true,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        smartSpeed: 1000,
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn'
+      });
     </script>
   </body>
 </html>
